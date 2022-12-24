@@ -1,0 +1,60 @@
+# Use the latest 2.1 version of CircleCI pipeline process engine.
+# See: https://circleci.com/docs/2.0/configuration-reference 
+version: 2.1
+jobs:
+  # Define a job to be invoked later in a workflow.
+  # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
+  #_________ name of the job (originaly sey-hello)
+  deployment:
+    # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
+    # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
+    docker:
+      # This is the default I changed the image to use one with gcloud pre-installed
+      # - image: cimg/base:stable 
+      - image: google/cloud-sdk
+    # Add steps to the job
+    # See: https://circleci.com/docs/2.0/configuration-reference/#steps
+    steps:
+      # checkout gets the code from the GitHub repository
+      - checkout
+      - run:
+        #_________ Crete app.yaml
+          name: "Create app.yaml"
+          # pay attention to the number of spaces inside the string to make the correct identation
+          command: 'echo -e "runtime: nodejs16\nenv_variables:\n  ATLASDB: $ATLASDB\n  ATLASDB_USERNAME: $ATLASDB_USERNAME\n  ATLASDB_PASSWORD: $ATLASDB_PASSWORD\n  SECRETKEY: $SECRETKEY\n" > app.yaml'
+      # ____________ Google Cloud Authentication; vertical bar is a substitute for quotes
+      - run:
+          name: "Google Cloud Authentication"
+          command: |
+            echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
+            gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
+            gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
+      #_________ Deploy the app
+      - run:
+          name: "Deploy the app"
+          command: "gcloud app deploy"
+      #_________ Remove app.yaml file (for security)
+      - run:
+          name: "Remove app.yaml"
+          command: "rm app.yaml"
+# Invoke jobs via workflows
+# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
+workflows:
+  # Name of the workflow
+  deployment_workflow:
+    jobs:
+      # invoke the job by name
+      - deployment:
+        filters:
+          branches:
+            only:
+              - main
+
+
+
+
+
+
+      
+
+

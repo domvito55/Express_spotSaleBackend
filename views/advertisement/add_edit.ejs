@@ -1,0 +1,122 @@
+<%- include ('../partials/header') %>
+
+<div class="container">
+    <div class="row">
+        <div class="offset-md-3 col-md-6">
+            <h1><%= title %></h1>
+
+            <form class="form" method="POST">
+                <div class="form-group">
+
+                    <input type="hidden" name="id" value="<%= Advertisement._id %>">
+
+                    <label for="categoryField">Category</label>                   
+                    <input type="text" class="form-control"
+                        id="categoryField"
+                        placeholder=""
+                        name="category"
+                        value="<%= Advertisement.category %>"
+                        required>
+                    
+                    <label for="titleField">Title</label>
+                    <input type="text" class="form-control"
+                        id="titleField"
+                        placeholder=""
+                        name="title" 
+                        value="<%= Advertisement.title %>"
+                        required>
+
+                    <label for="descriptionField">Description</label>
+                    <input type="text" class="form-control"
+                        id="descriptionField"
+                        placeholder=""
+                        name="description" 
+                        value="<%= Advertisement.description %>"
+                        required>
+
+                    <label for="conditionField">Condition</label>
+                    <input type="text" class="form-control"
+                        id="conditionField"
+                        placeholder=""
+                        name="condition" 
+                        value="<%= Advertisement.condition %>"
+                        required>
+
+                    <label for="conditionField">Price</label>
+                        <input type="text" class="form-control"
+                            id="priceField"
+                            placeholder=""
+                            name="price" 
+                            value="<%= Advertisement.price %>"
+                            required>
+
+                    <div class="form-group">
+                        <label for="soldField">Sold</label>
+                        <input type="checkbox"
+                            class="form-check-input"
+                            id="soldField"
+                            name="sold" 
+                            value=<%= Advertisement.sold %>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="enableField">Enable</label>
+                        <input type="checkbox"
+                            class="form-check-input"
+                            id="enableField"
+                            name="enable" 
+                            value=<%= Advertisement.enable %>
+                    </div>
+                    <BR>
+                    <label for="deliveryMethodField">Delivery Method</label>
+                        <input type="text" class="form-control"
+                            id="deliveryMethodField"
+                            placeholder=""
+                            name="deliveryMethod" 
+                            value="<%= Advertisement.deliveryMethod %>"
+                            required>
+
+                    <label for="publishedDateField">Published Date</label>
+                        <input type="date" class="form-control"
+                            id="publishDateField"
+                            placeholder=""
+                            name="publishedDate" 
+                            value="<%= Advertisement.publishedDate %>"
+                            required>
+
+                    <label for="expiryDateField">Expiry Date</label>
+                        <input type="date" class="form-control"
+                            id="expiryDateField"
+                            placeholder=""
+                            name="expiryDate" 
+                            value="<%= Advertisement.expiryDate %>"
+                            required>
+
+                    <label for="userNameField">Seller</label>
+                        <input type="text" class="form-control"
+                            id="userNameField"
+                            placeholder=""
+                            name="userName" 
+                            value="<%= Advertisement.userName %>"
+                            required>
+
+                </div>
+
+                <br/>
+                <button class="btn btn-primary" type="submit">
+                    <i class="fas fa-edit"></i> 
+                    Submit
+                </button>
+                
+                <a href="/advertisement" class="btn btn-warning">
+                    <i class="fas fa-undo"></i> 
+                    Cancel
+                </a>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<%- include ('../partials/footer') %>

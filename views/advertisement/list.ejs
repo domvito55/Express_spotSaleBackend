@@ -1,0 +1,59 @@
+<%- include ('../partials/header') %>
+
+<table class="table table-bordered table-striped table-hover">
+    <!-- Header Row-->
+    <tr>
+        <th class="text-left">Category</th>
+        <th class="text-left">Title</th>
+        <th class="text-left">Description</th>
+        <th class="text-left">Condition</th>
+        <th class="text-left">Price</th>
+        <th class="text-left">Sold?</th>
+        <th class="text-left">Enable?</th>
+        <th class="text-left">Delivery Method</th>
+        <th class="text-left">Creation Date</th>
+        <th class="text-left">Published Date</th>
+        <th class="text-left">Expiry Date</th>
+        <th class="text-left">Seller</th>
+    </tr>
+
+    <!-- Repeatable Template Row -->
+    <% for(let count = 0; count < AdvertisementList.length; count++) { %>
+        <tr>
+            <td class="text-left"><%= AdvertisementList[count].category %></td>
+            <td class="text-left"><%= AdvertisementList[count].title %></td>
+            <td class="text-left"><%= AdvertisementList[count].description %></td>
+            <td class="text-left"><%= AdvertisementList[count].condition %></td>
+            <td class="text-left"><%= AdvertisementList[count].price %></td>
+            <td class="text-left"><%= AdvertisementList[count].sold %></td>
+            <td class="text-left"><%= AdvertisementList[count].enable %></td>
+            <td class="text-left"><%= AdvertisementList[count].deliveryMethod %></td>
+            <td class="text-left"><%= AdvertisementList[count].creationDate %></td>
+            <td class="text-left"><%= AdvertisementList[count].publishedDate %></td>
+            <td class="text-left"><%= AdvertisementList[count].expiryDate %></td>
+            <td class="text-left"><%= AdvertisementList[count].userName %></td>
+
+            <td class="text-center">
+                <a href="/advertisement/edit/<%= AdvertisementList[count]._id %>" class="btn btn-primary btn-sm">
+                <i class="fas fa-pencil-alt">Edit</i></a>
+            </td>
+
+            <td class="text-center">
+                <a href="/advertisement/delete/<%= AdvertisementList[count]._id %>" class="btn btn-danger btn-sm">
+                <i class="fas fa-trash-alt">Delete</i></a>
+            </td>
+
+        </tr>
+    <% } %>
+</table>
+
+<div class="row" >
+    <div class="float-start">
+        <a href="/advertisement/add" class="btn btn-primary" role="button">
+            <i class="fas fa-plus-circle"></i> 
+            Post a new advertisement
+        </a> 
+    </div>           
+</div>
+
+<%- include ('../partials/footer') %>
