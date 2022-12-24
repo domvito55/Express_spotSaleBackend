@@ -38,7 +38,7 @@ const UserSchema = mongoose.Schema(
         admin: Boolean
     },
     {
-        collection: "user"
+        collection: "users"
     }
     
 );
