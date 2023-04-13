@@ -10,7 +10,8 @@ jobs:
     # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
     docker:
       # This is the default I changed the image to use one with gcloud pre-installed
-      # - image: cimg/base:stable 
+      # - image: cimg/base:stable
+      # This is a Ubuntu image
       - image: google/cloud-sdk
     # Add steps to the job
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
@@ -21,6 +22,8 @@ jobs:
         #_________ Crete app.yaml
           name: "Create app.yaml"
           # pay attention to the number of spaces inside the string to make the correct identation
+          # The following command will create a file under circle CI this file will hold the environmnet
+          # variables and run the command runtime: nodejs16 need for GClound deployment
           command: 'echo -e "runtime: nodejs16\nenv_variables:\n  ATLASDB: $ATLASDB\n  ATLASDB_USERNAME: $ATLASDB_USERNAME\n  ATLASDB_PASSWORD: $ATLASDB_PASSWORD\n  SECRETKEY: $SECRETKEY\n" > app.yaml'
       # ____________ Google Cloud Authentication; vertical bar is a substitute for quotes
       - run:
